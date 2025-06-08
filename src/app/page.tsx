@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -5,7 +6,8 @@ import { AppHeader } from '@/components/layout/app-header';
 import { Timeline } from '@/components/timeline/timeline';
 import { WorkStatePrompt } from '@/components/prompts/work-state-prompt';
 import type { ActivityEvent } from '@/types';
-import { AppWindow, FileText, Power, MessageSquare, Info } from 'lucide-react';
+import { AppWindow, FileText, Power, MessageSquare, Info, RefreshCw } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Mock data for initial activities
 const MOCK_INITIAL_ACTIVITIES: ActivityEvent[] = [
@@ -98,6 +100,13 @@ export default function HomePage() {
     );
     setShowWorkStatePrompt(false);
   };
+
+  const handleRefreshTimeline = () => {
+    setActivityEvents(MOCK_INITIAL_ACTIVITIES);
+    // Note: This does not re-trigger the WorkStatePrompt logic from useEffect,
+    // as that is typically for a "welcome back" scenario.
+    // If the prompt should also reset, additional logic would be needed here.
+  };
   
   if (!isClient) {
      // Render nothing or a loading indicator on the server to avoid hydration mismatch
@@ -108,7 +117,13 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen bg-background">
       <AppHeader />
       <main className="flex-1 container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-headline font-semibold mb-6 text-primary">Activity Timeline</h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-3xl font-headline font-semibold text-primary">Activity Timeline</h2>
+          <Button variant="outline" size="sm" onClick={handleRefreshTimeline}>
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Refresh Timeline
+          </Button>
+        </div>
         <Timeline events={activityEvents} />
       </main>
       <WorkStatePrompt
