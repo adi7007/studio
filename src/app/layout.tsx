@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Sentinel Tracker',
+  title: 'Employee Tracker',
   description: 'Track your system activity and work context.',
 };
 

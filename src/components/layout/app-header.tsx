@@ -7,7 +7,7 @@ export function AppHeader() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Activity className="h-8 w-8 mr-3 text-accent" />
-            <h1 className="text-2xl font-headline font-semibold">Sentinel Tracker</h1>
+            <h1 className="text-2xl font-headline font-semibold">Employee Tracker</h1>
           </div>
         </div>
       </div>
